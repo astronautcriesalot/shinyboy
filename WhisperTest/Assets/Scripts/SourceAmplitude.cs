@@ -18,6 +18,7 @@ public class SourceAmplitude : MonoBehaviour
     {
         samples = new float[sampleAmount];
         mAudioSource = gameObject.GetComponent<AudioSource>();
+        loudnessDataSet = new int[10];
     }
 
     float GetVolumeThisFrame()
@@ -49,7 +50,34 @@ public class SourceAmplitude : MonoBehaviour
     void Update()
     {
         myVolume = GetVolumeThisFrame();
-        //print (myVolume);
+        //print(myVolume);
+        //DataTester();
     }
+
+
+    //stuff for debug
+    //void OnApplicationQuit()
+    //{
+    //    foreach(int i in loudnessDataSet)
+    //    {
+    //        print(i);
+    //    }
+    //}
+    int[] loudnessDataSet;
+    void DataTester()
+    {
+        if (myVolume >= .9) loudnessDataSet[9]++;
+        else if (myVolume >= .8) loudnessDataSet[8]++;
+        else if (myVolume >= .7) loudnessDataSet[7]++;
+        else if (myVolume >= .6) loudnessDataSet[6]++;
+        else if (myVolume >= .5) loudnessDataSet[5]++;
+        else if (myVolume >= .4) loudnessDataSet[4]++;
+        else if (myVolume >= .3) loudnessDataSet[3]++;
+        else if (myVolume >= .2) loudnessDataSet[2]++;
+        else if (myVolume >= .1) loudnessDataSet[1]++;
+        else if (myVolume >= 0) loudnessDataSet[0]++;
+
+    }
+
 }
 

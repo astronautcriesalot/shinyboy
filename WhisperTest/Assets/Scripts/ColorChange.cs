@@ -18,7 +18,7 @@ public class ColorChange : MonoBehaviour
     public Color[] colorMarkers;
 
     private List<float> ampHistory = new List<float>();
-    private int HISTORY_LENGTH = 24;
+    private int HISTORY_LENGTH = 48;
     public float SCALE = 1f;
 
     /*private float TIME_DELAY = 0.1f;
