@@ -13,8 +13,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float StrideInterval;
         [Range(0f, 1f)] public float RunningStrideLengthen;
 
+		public bool magOn;
+
        // private CameraRefocus m_CameraRefocus;
-        private bool m_PreviouslyGrounded;
+		private bool m_PreviouslyGrounded;
         private Vector3 m_OriginalCameraPosition;
 
 
@@ -28,6 +30,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
+
+			if (rigidbodyFirstPersonController.Velocity.magnitude > 0) {
+				magOn = true;
+			} else {
+				magOn = false;
+			}
+
           //  m_CameraRefocus.GetFocusPoint();
             Vector3 newCameraPosition;
             if (rigidbodyFirstPersonController.Velocity.magnitude > 0 && rigidbodyFirstPersonController.Grounded)
