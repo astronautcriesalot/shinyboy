@@ -8,7 +8,8 @@ public class SourceAmplitude : MonoBehaviour {
 	private float[] samples;
 	//assign this in the inspector
 	private AudioSource mAudioSource;
-	public float myVolume; 
+	public float myVolume;
+    public Transform player;
 
 
 	void Awake(){
@@ -22,8 +23,20 @@ public class SourceAmplitude : MonoBehaviour {
 
 			mAudioSource.clip.GetData(samples, sampleOffsetTime);
 			float loudness = Mathf.Abs(samples[0]) * mAudioSource.volume;
-			//return samples[0];
-			return loudness; 
+
+            //find distance to player
+            Vector3 distanceVec = player.position - transform.position;
+            float distanceSqr = Vector3.SqrMagnitude(distanceVec);
+            //print(Mathf.Sqrt(distanceSqr));
+            float maxDistanceSqr = Mathf.Pow(mAudioSource.maxDistance, 2);
+            //// the further you are, the smaller the sound, so loudness decreases as distancesq increases.
+            float distanceFactor =  1 - (distanceSqr / maxDistanceSqr);
+            //print(distanceFactor);
+            distanceFactor = Mathf.Clamp(distanceFactor, 0.0f, 1.0f);
+            loudness*= distanceFactor; // multiply the loudness based on the distance factor
+
+            //return samples[0];
+            return loudness; 
 		}
 		return 0;
 	}

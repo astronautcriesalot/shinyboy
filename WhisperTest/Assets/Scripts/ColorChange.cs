@@ -18,7 +18,7 @@ public class ColorChange : MonoBehaviour {
     
     private List<float> ampHistory = new List<float>();
     private int HISTORY_LENGTH = 24;
-    private float SCALE = 1.0f;
+    public float SCALE = 1f;
 
     /*private float TIME_DELAY = 0.1f;
     private float progress = 0.0f;
@@ -32,13 +32,21 @@ public class ColorChange : MonoBehaviour {
         if (colorMarkers.Length == 0)
         {
             colorMarkers = new Color[7];
-            colorMarkers[0] = pink;
-            colorMarkers[1] = orange;
-            colorMarkers[2] = yellow;
+            //colorMarkers[0] = pink;
+            //colorMarkers[1] = orange;
+            //colorMarkers[2] = yellow;
+            //colorMarkers[3] = green;
+            //colorMarkers[4] = blue;
+            //colorMarkers[5] = indigo;
+            //colorMarkers[6] = violet;
+
+            colorMarkers[0] = violet;
+            colorMarkers[1] = indigo;
+            colorMarkers[2] = blue;
             colorMarkers[3] = green;
-            colorMarkers[4] = blue;
-            colorMarkers[5] = indigo;
-            colorMarkers[6] = violet;
+            colorMarkers[4] = yellow;
+            colorMarkers[5] = orange;
+            colorMarkers[6] = pink;
         }
 	}
 
@@ -76,6 +84,7 @@ public class ColorChange : MonoBehaviour {
         int numMarkers = colorMarkers.Length;
         int index = (int) Mathf.Floor(averageAmp * numMarkers);
         if (index == numMarkers) index--;
+        index = Mathf.Clamp(index, 0, colorMarkers.Length - 2);
         float t = Mathf.Clamp01((averageAmp - (index / numMarkers)) * numMarkers);
         if (index == numMarkers - 1)
             return Color.Lerp(colorMarkers[index], colorMarkers[0], t);
