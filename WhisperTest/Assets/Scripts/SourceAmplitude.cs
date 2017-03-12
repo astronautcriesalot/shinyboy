@@ -13,6 +13,8 @@ public class SourceAmplitude : MonoBehaviour
     public float myVolume;
     public Transform player;
 
+	public AudioLowPassFilter lowPass;
+	public AudioHighPassFilter highPass;
 
     void Awake()
     {
@@ -20,6 +22,14 @@ public class SourceAmplitude : MonoBehaviour
         mAudioSource = gameObject.GetComponent<AudioSource>();
         loudnessDataSet = new int[10];
     }
+
+	void Start()
+	{
+		lowPass = GetComponent<AudioLowPassFilter> ();
+		highPass = GetComponent<AudioHighPassFilter> ();
+
+		disableFuzz ();
+	}
 
     float GetVolumeThisFrame()
     {
@@ -78,6 +88,18 @@ public class SourceAmplitude : MonoBehaviour
         else if (myVolume >= 0) loudnessDataSet[0]++;
 
     }
+
+	public void enableFuzz()
+	{
+		lowPass.enabled = true;
+		highPass.enabled = true; 
+	}
+
+	public void disableFuzz()
+	{
+		lowPass.enabled = false;
+		highPass.enabled = false; 
+	}
 
 }
 
