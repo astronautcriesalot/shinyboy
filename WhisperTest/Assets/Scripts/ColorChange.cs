@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChange : MonoBehaviour {
+public class ColorChange : MonoBehaviour
+{
 
-	public Renderer rend;
-	public float duration = 1.0F;
+    public Renderer rend;
+    public float duration = 1.0F;
 
-	Color pink = new Color32(251,57,154,255);
-	Color orange = new Color32(253,166,124,255);
-	Color yellow = new Color32(253,230,164,255);
-	Color green = new Color32(190,226,180,255);
-	Color blue = new Color32(94,212,247,255);
-	Color indigo = new Color32(76,153,248,255);
-	Color violet = new Color32(152,97,250,255);
+    Color pink = new Color32(251, 57, 154, 255);
+    Color orange = new Color32(253, 166, 124, 255);
+    Color yellow = new Color32(253, 230, 164, 255);
+    Color green = new Color32(190, 226, 180, 255);
+    Color blue = new Color32(94, 212, 247, 255);
+    Color indigo = new Color32(76, 153, 248, 255);
+    Color violet = new Color32(152, 97, 250, 255);
     public Color[] colorMarkers;
-    
+
     private List<float> ampHistory = new List<float>();
     private int HISTORY_LENGTH = 24;
-    private float SCALE = 1.0f;
+    public float SCALE = 1f;
 
     /*private float TIME_DELAY = 0.1f;
     private float progress = 0.0f;
@@ -27,23 +28,32 @@ public class ColorChange : MonoBehaviour {
     private Color colorEnd = Color.white;*/
 
     // Use this for initialization
-    void Start () {
-		rend = GetComponent<Renderer>();
+    void Start()
+    {
+        rend = GetComponent<Renderer>();
         if (colorMarkers.Length == 0)
         {
             colorMarkers = new Color[7];
-            colorMarkers[0] = pink;
-            colorMarkers[1] = orange;
-            colorMarkers[2] = yellow;
-            colorMarkers[3] = green;
-            colorMarkers[4] = blue;
-            colorMarkers[5] = indigo;
-            colorMarkers[6] = violet;
-        }
-	}
+            //colorMarkers[0] = pink;
+            //colorMarkers[1] = orange;
+            //colorMarkers[2] = yellow;
+            //colorMarkers[3] = green;
+            //colorMarkers[4] = blue;
+            //colorMarkers[5] = indigo;
+            //colorMarkers[6] = violet;
 
-	// Update is called once per frame
-	void Update ()
+            colorMarkers[0] = violet;
+            colorMarkers[1] = indigo;
+            colorMarkers[2] = blue;
+            colorMarkers[3] = green;
+            colorMarkers[4] = yellow;
+            colorMarkers[5] = orange;
+            colorMarkers[6] = pink;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         /*if (shouldCalculate)
         {
@@ -74,8 +84,9 @@ public class ColorChange : MonoBehaviour {
         }
         averageAmp = averageAmp / ampHistory.Count;
         int numMarkers = colorMarkers.Length;
-        int index = (int) Mathf.Floor(averageAmp * numMarkers);
+        int index = (int)Mathf.Floor(averageAmp * numMarkers);
         if (index == numMarkers) index--;
+        index = Mathf.Clamp(index, 0, colorMarkers.Length - 2);
         float t = Mathf.Clamp01((averageAmp - (index / numMarkers)) * numMarkers);
         if (index == numMarkers - 1)
             return Color.Lerp(colorMarkers[index], colorMarkers[0], t);
@@ -83,3 +94,4 @@ public class ColorChange : MonoBehaviour {
             return Color.Lerp(colorMarkers[index], colorMarkers[index + 1], t);
     }
 }
+
