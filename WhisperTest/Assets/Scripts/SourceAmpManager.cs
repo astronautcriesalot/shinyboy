@@ -25,6 +25,12 @@ public class SourceAmpManager : MonoBehaviour {
 
 	public float scrubSensitivity = 1f; 
 
+	float combinedClearAmps= 0;
+	float combinedFuzzAmps= 0;
+
+	public float totalAmps = 0;
+
+
     void Awake()
     {
         deadZoneAmps = new List<SourceAmplitude>();
@@ -53,6 +59,8 @@ public class SourceAmpManager : MonoBehaviour {
         DoStuffToFuzzAmps();
         DoStuffToClearAmps();
 
+		totalAmps = combinedFuzzAmps + combinedClearAmps;
+
 	}
 
     void DoStuffToDeadAmps()
@@ -66,20 +74,24 @@ public class SourceAmpManager : MonoBehaviour {
 
     void DoStuffToFuzzAmps()
     {
+		combinedFuzzAmps = 0;
         foreach (SourceAmplitude amp in fuzzZoneAmps)
         {
 			amp.gameObject.GetComponent<AudioSource> ().mute = false;
 			amp.enableFuzz ();
+			combinedFuzzAmps += amp.myVolume;
         }
 
     }
 
     void DoStuffToClearAmps()
-    {
+	{
+		combinedClearAmps = 0;
         foreach (SourceAmplitude amp in clearZoneAmps)
         {
 			amp.gameObject.GetComponent<AudioSource> ().mute = false;
 			amp.disableFuzz();
+			combinedClearAmps += amp.myVolume;
         }
 
     }
