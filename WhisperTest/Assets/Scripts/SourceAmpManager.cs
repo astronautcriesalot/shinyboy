@@ -148,4 +148,13 @@ public class SourceAmpManager : MonoBehaviour {
 		}
 	}
 
+    public float getClearUpperLimit()
+    {
+        return clearUpperLimit;
+    }
+
+    public float getClearLowerLimit()
+    {
+        return clearLowerLimit;
+    }
 }
