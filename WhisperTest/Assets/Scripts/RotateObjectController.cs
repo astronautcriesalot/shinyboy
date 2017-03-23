@@ -16,6 +16,7 @@ public class RotateObjectController : MonoBehaviour
     public GameObject EquipPrefab;
     public Transform SpawnPoint;
     public GameObject Player;
+    Camera cam;
     GameObject obj;
     // Use this for initialization
     void Awake()
@@ -29,6 +30,8 @@ public class RotateObjectController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        //disable the trigger
+        this.GetComponent<Collider>().enabled = false;
     }
     void Start()
     {
@@ -39,6 +42,7 @@ public class RotateObjectController : MonoBehaviour
         Transform mainTransform = GameObject.Find("FermiVision Canvas").transform.Find("ViewMaster");
         Eye_L = mainTransform.Find("Eye_L").gameObject;
         Eye_R = mainTransform.Find("Eye_R").gameObject;
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -82,23 +86,25 @@ public class RotateObjectController : MonoBehaviour
     {
         CanRotate = false;
     }
-    void OnMouseDown()
+
+    void OnMouseDrag()
     {
         if (CanRotate)
-            isRotating = true;
+            Rotate();
     }
-    void OnMouseUp()
+    /*void OnMouseUp()
     {
         CanRotate = false;
         isRotating = false;
-    }
+    }*/
     void Rotate()
     {
         Debug.Log("ROTATING");
-        //Rotate Object along mouse direction
-        float _x = Input.GetAxis("Mouse X");
-        float _y = Input.GetAxis("Mouse Y");
-        this.transform.rotation = Quaternion.Euler(new Vector3(_x,_y,0.0f));
+        float _x = Input.GetAxis("Mouse X")*8.0f *Mathf.Deg2Rad;
+        float _y = Input.GetAxis("Mouse Y") * 8.0f * Mathf.Deg2Rad;
+        transform.RotateAround(Vector3.up, -_x);
+        transform.RotateAround(Vector3.right, _y);
+
     }
 
     void OnEscape() {
