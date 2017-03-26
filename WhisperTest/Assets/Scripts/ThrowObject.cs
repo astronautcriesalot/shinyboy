@@ -78,13 +78,14 @@ public class ThrowObject: MonoBehaviour
 				beingCarried = false;
 			}
 		}
-		if (!beingCarried) 
-		{
-			if(sticky == true)
-			{
-				GetComponent<Rigidbody>().useGravity = false;
-				transform.rotation = Quaternion.identity;
-				GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;;
+		if (!beingCarried) {
+			if (gameObject.tag == "Sticker") {
+				if (sticky == true) {
+					GetComponent<Rigidbody> ().useGravity = false;
+					transform.rotation = Quaternion.identity;
+					GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+					GetComponent<Rigidbody> ().isKinematic = false;
+				}
 			}
 		}
 

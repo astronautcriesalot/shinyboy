@@ -22,7 +22,8 @@ public class CameraRay : MonoBehaviour {
 			if (hit.collider != null) {
 				//Debug.Log ("hit anything??");
 				//hit.collider.enabled = false;
-				if (hit.collider.tag == "Interactable") {
+				if (hit.collider.GetComponent<ThrowObject>() != null){
+				//if (hit.collider.tag == "Interactable") {
 					hitAnInteractable = true;
 					hit.collider.GetComponent<ThrowObject> ().rayHit = true;
 				} else {
