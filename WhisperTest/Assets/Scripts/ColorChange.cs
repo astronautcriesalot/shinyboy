@@ -19,7 +19,8 @@ public class ColorChange : MonoBehaviour
 
     private List<float> ampHistory = new List<float>();
     private int HISTORY_LENGTH = 48;
-    public float SCALE = 1f;
+    public float min_AMP = 0f;
+    public float max_AMP = 0.01f;
 
     /*private float TIME_DELAY = 0.1f;
     private float progress = 0.0f;
@@ -73,7 +74,7 @@ public class ColorChange : MonoBehaviour
 
     Color calcNewColor()
     {
-        float amp = GetComponent<SourceAmplitude>().myVolume * SCALE;
+        float amp = Mathf.Lerp(0, 1, (GetComponent<SourceAmplitude>().myVolume - min_AMP) / (max_AMP - min_AMP));
         ampHistory.Add(amp);
         if (ampHistory.Count > HISTORY_LENGTH)
             ampHistory.RemoveAt(0);
@@ -83,15 +84,10 @@ public class ColorChange : MonoBehaviour
             averageAmp += a;
         }
         averageAmp = averageAmp / ampHistory.Count;
-        int numMarkers = colorMarkers.Length;
-        int index = (int)Mathf.Floor(averageAmp * numMarkers);
-        if (index == numMarkers) index--;
-        index = Mathf.Clamp(index, 0, colorMarkers.Length - 2);
-        float t = Mathf.Clamp01((averageAmp - (index / numMarkers)) * numMarkers);
-        if (index == numMarkers - 1)
-            return Color.Lerp(colorMarkers[index], colorMarkers[0], t);
-        else
-            return Color.Lerp(colorMarkers[index], colorMarkers[index + 1], t);
+        int index = (int)Mathf.Floor(averageAmp * colorMarkers.Length);
+        if (index >= colorMarkers.Length - 1) return colorMarkers[colorMarkers.Length - 1];
+        float t = Mathf.Clamp01(averageAmp * colorMarkers.Length - index);
+        return Color.Lerp(colorMarkers[index], colorMarkers[index + 1], t);
     }
 }
 
