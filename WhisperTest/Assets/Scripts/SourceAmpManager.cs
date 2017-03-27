@@ -8,8 +8,6 @@ public class SourceAmpManager : MonoBehaviour {
     List<SourceAmplitude> clearZoneAmps;
     List<SourceAmplitude> fuzzZoneAmps;
 
-	[SerializeField] float distortLowerLimit;
-	[SerializeField] float distortUpperLimit;
     [SerializeField] float fuzzUpperLimit;
     [SerializeField] float fuzzLowerLimit;
     [SerializeField] float clearUpperLimit;
@@ -27,8 +25,8 @@ public class SourceAmpManager : MonoBehaviour {
 
 	public float scrubSensitivity = 1f; 
 
-	float combinedClearAmps= 0;
-	float combinedFuzzAmps= 0;
+	public float combinedClearAmps= 0;
+	public float combinedFuzzAmps= 0;
 
 	public float totalAmps = 0;
 
