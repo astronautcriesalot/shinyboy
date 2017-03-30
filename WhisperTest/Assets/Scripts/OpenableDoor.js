@@ -22,14 +22,14 @@ function Update (){
   transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
  }
 
- if(Input.GetKeyDown("f") && enter){
+ if(Input.GetKeyDown(KeyCode.E) && enter){
   open = !open;
  }
 }
 
 function OnGUI(){
  if(enter){
-  GUI.Label(new Rect(Screen.width/2 - 75, Screen.height - 100, 150, 30), "Press 'F' to open the door");
+  GUI.Label(new Rect(Screen.width/2 - 75, Screen.height - 100, 150, 30), "Press 'E' to open the door");
  }
 }
 
