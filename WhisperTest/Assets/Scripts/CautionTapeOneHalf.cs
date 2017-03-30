@@ -37,12 +37,14 @@ public class CautionTapeOneHalf : MonoBehaviour {
                 rigid.isKinematic = true;
                 this.transform.parent = Camera.main.transform;
                 IsBeingCarried = true;
+                this.GetComponent<Collider>().enabled = false;
             }
         }
         if (Input.GetMouseButtonDown(1))
         {
             if (IsBeingCarried)
             {
+                this.GetComponent<Collider>().enabled = true;
                 rigid.constraints = RigidbodyConstraints.None;
                 rigid.useGravity = true;
                 rigid.isKinematic = false;
@@ -91,8 +93,8 @@ public class CautionTapeOneHalf : MonoBehaviour {
             Debug.Log("TRIGGER WALL");
             //stick on the wall
             this.transform.parent = CTapeParent;
-                rigid.isKinematic = false;
-                IsBeingCarried = false;
+            rigid.isKinematic = false;
+            IsBeingCarried = false;
         }
         if(other.tag == "Player"){
             CanbeCarried = true;
