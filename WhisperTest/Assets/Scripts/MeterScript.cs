@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeterScript : MonoBehaviour {
 
 	public GameObject meterAmpManager;
+	public GameObject camera;
 	public float meterLevel;
 	bool adjustMeterNow;
 
@@ -65,6 +66,9 @@ public class MeterScript : MonoBehaviour {
 			meter4.gameObject.SetActive(false);
 			meter5.gameObject.SetActive(false);
 			meter6.gameObject.SetActive(false);	
+			camera.GetComponent<GlitchEffect> ().intensity = 0f;
+			camera.GetComponent<GlitchEffect> ().flipIntensity = 0f;
+			camera.GetComponent<GlitchEffect> ().colorIntensity = 0f;
 		} 
 		else if (meterLevel > 0f && meterLevel <= cap1)
 		{
@@ -74,6 +78,9 @@ public class MeterScript : MonoBehaviour {
 			meter4.gameObject.SetActive(false);
 			meter5.gameObject.SetActive(false);
 			meter6.gameObject.SetActive(false);	
+			camera.GetComponent<GlitchEffect> ().intensity = 0f;
+			camera.GetComponent<GlitchEffect> ().flipIntensity = 0f;
+			camera.GetComponent<GlitchEffect> ().colorIntensity = 0f;
 		}
 		else if (meterLevel > cap1 && meterLevel <= cap2)
 		{
@@ -83,6 +90,9 @@ public class MeterScript : MonoBehaviour {
 			meter4.gameObject.SetActive(false);
 			meter5.gameObject.SetActive(false);
 			meter6.gameObject.SetActive(false);	
+			camera.GetComponent<GlitchEffect> ().intensity = 0f;
+			camera.GetComponent<GlitchEffect> ().flipIntensity = 0f;
+			camera.GetComponent<GlitchEffect> ().colorIntensity = 0f;
 		}	
 		else if (meterLevel > cap2 && meterLevel <= cap3)
 		{
@@ -92,6 +102,9 @@ public class MeterScript : MonoBehaviour {
 			meter4.gameObject.SetActive(false);
 			meter5.gameObject.SetActive(false);
 			meter6.gameObject.SetActive(false);	
+			camera.GetComponent<GlitchEffect> ().intensity = 0.3f;
+			camera.GetComponent<GlitchEffect> ().flipIntensity = 0.3f;
+			camera.GetComponent<GlitchEffect> ().colorIntensity = 0.3f;
 		}	
 		else if (meterLevel > 0.01f && meterLevel <= 0.015f)
 		{
@@ -101,6 +114,9 @@ public class MeterScript : MonoBehaviour {
 			meter4.gameObject.SetActive(true);
 			meter5.gameObject.SetActive(false);
 			meter6.gameObject.SetActive(false);	
+			camera.GetComponent<GlitchEffect> ().intensity = 0.5f;
+			camera.GetComponent<GlitchEffect> ().flipIntensity = 0.5f;
+			camera.GetComponent<GlitchEffect> ().colorIntensity = 0.5f;
 		}	
 		else if (meterLevel > cap3 && meterLevel <= cap4)
 		{
@@ -110,6 +126,9 @@ public class MeterScript : MonoBehaviour {
 			meter4.gameObject.SetActive(true);
 			meter5.gameObject.SetActive(true);
 			meter6.gameObject.SetActive(false);	
+			camera.GetComponent<GlitchEffect> ().intensity = 0.75f;
+			camera.GetComponent<GlitchEffect> ().flipIntensity = 0.75f;
+			camera.GetComponent<GlitchEffect> ().colorIntensity = 0.75f;
 		}
 		else if (meterLevel > cap4)
 		{
@@ -118,7 +137,10 @@ public class MeterScript : MonoBehaviour {
 			meter3.gameObject.SetActive(true);
 			meter4.gameObject.SetActive(true);
 			meter5.gameObject.SetActive(true);
-			meter6.gameObject.SetActive(true);		
+			meter6.gameObject.SetActive(true);	
+			camera.GetComponent<GlitchEffect> ().intensity = 1f;
+			camera.GetComponent<GlitchEffect> ().flipIntensity = 1f;
+			camera.GetComponent<GlitchEffect> ().colorIntensity = 1f;
 		}
 
 		//print(Time.time);
