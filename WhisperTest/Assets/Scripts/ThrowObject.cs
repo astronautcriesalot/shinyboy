@@ -18,19 +18,20 @@ public class ThrowObject: MonoBehaviour
 	public bool hitAnInteractable = false;
 	public float distanceToHighlight;
 	public bool corkStuck;
-
+    int OriginalObjectLayer;
 	public GameObject corkboard;
-
-	void Start()
+    Camera objectsCamera; 
+    void Start()
 	{
 		audio = GetComponent<AudioSource>();
 		GetComponent<Rigidbody>().useGravity = true;
 		GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 		gameObject.layer = 8;
 		corkStuck = false;
-
+        OriginalObjectLayer = this.gameObject.layer;
 		corkboard = GameObject.Find("StickyWall");
-	}
+        objectsCamera = Camera.main.transform.GetChild(0).GetComponent<Camera>();
+    }
 
 	void Update()
 	{
@@ -41,6 +42,7 @@ public class ThrowObject: MonoBehaviour
 		{
 			if (rayHit == true) {
 				hasPlayer = true;
+                //if(!beingCarried)
 				gameObject.layer = 1;
 			}
 		}
@@ -48,7 +50,8 @@ public class ThrowObject: MonoBehaviour
 		if (!rayHit)
 		{
 			hasPlayer = false;
-			gameObject.layer = 8;
+            //if (!beingCarried)
+            gameObject.layer = 8;
 		}
 
 
@@ -58,10 +61,12 @@ public class ThrowObject: MonoBehaviour
 			GetComponent<Rigidbody>().isKinematic = true;
 			transform.parent = playerCam;
 			beingCarried = true;
+            this.gameObject.layer = 11;
 		}
 		if (beingCarried)
 		{
-			GetComponent<Rigidbody>().useGravity = true;
+            this.gameObject.layer = 11;
+            GetComponent<Rigidbody>().useGravity = true;
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 			if (touched)
 			{
@@ -84,6 +89,8 @@ public class ThrowObject: MonoBehaviour
 				GetComponent<Rigidbody>().isKinematic = false;
 				transform.parent = null;
 				beingCarried = false;
+                //objectsCamera.cullingMask = 0;
+                this.gameObject.layer = OriginalObjectLayer;
 			}
 		}
 		if (!beingCarried) {
@@ -95,7 +102,6 @@ public class ThrowObject: MonoBehaviour
 					transform.position = new Vector3((corkboard.transform.position.x + 0.1f), transform.position.y, transform.position.z);
 					GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
 					GetComponent<Rigidbody> ().isKinematic = false;
-
 					corkboard.GetComponent<LineRenderer>().SetPosition(corkboard.GetComponent<YarnRenderer>().currentPosition, new Vector3(transform.position.x - 0.01f, transform.position.y - 0.01f, transform.position.z - 0.01f));
 					corkboard.GetComponent<YarnRenderer> ().currentPosition = corkboard.GetComponent<YarnRenderer> ().currentPosition + 1;
 				}

@@ -93,8 +93,8 @@ public class CautionTapeOneHalf : MonoBehaviour {
             Debug.Log("TRIGGER WALL");
             //stick on the wall
             this.transform.parent = CTapeParent;
-                rigid.isKinematic = false;
-                IsBeingCarried = false;
+            rigid.isKinematic = false;
+            IsBeingCarried = false;
         }
         if(other.tag == "Player"){
             CanbeCarried = true;
