@@ -122,7 +122,7 @@ public class ThrowObject: MonoBehaviour
 			sticky = true;
 		}
 
-		if (beingCarried)
+		if (beingCarried && other.tag == "Sticky")
 		{
 			touched = true;
 		}
