@@ -14,6 +14,8 @@ public class CautionTapeOneHalf : MonoBehaviour {
     LineRenderer line;
 	// Use this for initialization
 	void Start () {
+
+		gameObject.layer = 2;
         IsBeingCarried = false;
         rigid = this.GetComponent<Rigidbody>();
         CanbeCarried = false;
@@ -98,11 +100,13 @@ public class CautionTapeOneHalf : MonoBehaviour {
         }
         if(other.tag == "Player"){
             CanbeCarried = true;
+			this.gameObject.layer = 1;
         }
     }
     void OnTriggerExit()
     {
         CanbeCarried = false;
+		this.gameObject.layer = 2;
     }
 
 }
