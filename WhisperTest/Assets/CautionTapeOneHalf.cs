@@ -37,12 +37,14 @@ public class CautionTapeOneHalf : MonoBehaviour {
                 rigid.isKinematic = true;
                 this.transform.parent = Camera.main.transform;
                 IsBeingCarried = true;
+                this.GetComponent<Collider>().enabled = false;
             }
         }
         if (Input.GetMouseButtonDown(1))
         {
             if (IsBeingCarried)
             {
+                this.GetComponent<Collider>().enabled = true;
                 rigid.constraints = RigidbodyConstraints.None;
                 rigid.useGravity = true;
                 rigid.isKinematic = false;
