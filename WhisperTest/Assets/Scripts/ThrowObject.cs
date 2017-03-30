@@ -65,7 +65,7 @@ public class ThrowObject: MonoBehaviour
 		}
 		if (beingCarried)
 		{
-            this.gameObject.layer = 11;
+            //this.gameObject.layer = 11;
             GetComponent<Rigidbody>().useGravity = true;
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 			if (touched)
